@@ -165,14 +165,14 @@
 
         .arrow {
             position: absolute;
-            bottom: -30px;
+            top: 10px;
             left: 50%;
             transform: translateX(-50%);
             width: 0;
             height: 0;
             border-left: 30px solid transparent;
             border-right: 30px solid transparent;
-            border-bottom: 50px solid #ff4757;
+            border-top: 50px solid #ff4757;
             z-index: 10;
             filter: drop-shadow(0 4px 6px rgba(0, 0, 0, 0.4));
         }
@@ -346,8 +346,8 @@
             .arrow {
                 border-left: 25px solid transparent;
                 border-right: 25px solid transparent;
-                border-bottom: 40px solid #ff4757;
-                bottom: -25px;
+                border-top: 40px solid #ff4757;
+                top: 8px;
             }
 
             .spin-button {
@@ -418,8 +418,8 @@
 
         <div class="roulette-container">
             <div class="roulette-wrapper">
-                <canvas id="roulette"></canvas>
                 <div class="arrow"></div>
+                <canvas id="roulette"></canvas>
             </div>
             <button class="spin-button" id="spinBtn">돌리기!</button>
         </div>
@@ -685,9 +685,9 @@
             const normalizedRotation = rotation % (2 * Math.PI);
             const arcSize = (2 * Math.PI) / items.length;
             
-            // 화살표가 하단(6시 방향 = 3π/2)을 가리킴
-            // 룰렛 회전 후 화살표가 가리키는 섹션 계산
-            let arrowAngle = (3 * Math.PI / 2 - normalizedRotation) % (2 * Math.PI);
+            // 화살표가 12시 방향(위, 3π/2)을 가리킴
+            // 룰렛이 시계방향으로 회전하므로 화살표 기준에서 역방향 계산
+            let arrowAngle = (Math.PI / 2 - normalizedRotation) % (2 * Math.PI);
             if (arrowAngle < 0) arrowAngle += 2 * Math.PI;
             const selectedIndex = Math.floor(arrowAngle / arcSize) % items.length;
             
