@@ -686,8 +686,8 @@
             const arcSize = (2 * Math.PI) / items.length;
             
             // 화살표가 12시 방향(위)을 가리킴
-            // 정반대인 6시 방향(아래) 계산: π를 더함
-            let arrowAngle = (Math.PI / 2 - normalizedRotation + Math.PI) % (2 * Math.PI);
+            // 12시 방향은 3π/2 라디안
+            let arrowAngle = (3 * Math.PI / 2 - normalizedRotation) % (2 * Math.PI);
             if (arrowAngle < 0) arrowAngle += 2 * Math.PI;
             const selectedIndex = Math.floor(arrowAngle / arcSize) % items.length;
             
