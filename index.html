@@ -685,10 +685,11 @@
             const normalizedRotation = rotation % (2 * Math.PI);
             const arcSize = (2 * Math.PI) / items.length;
             
-            // 화살표가 아래를 가리키므로 (π/2 위치) 계산
-            let adjustedRotation = (2 * Math.PI - normalizedRotation - Math.PI / 2) % (2 * Math.PI);
-            if (adjustedRotation < 0) adjustedRotation += 2 * Math.PI;
-            const selectedIndex = Math.floor(adjustedRotation / arcSize) % items.length;
+            // 화살표가 하단(6시 방향 = 3π/2)을 가리킴
+            // 룰렛 회전 후 화살표가 가리키는 섹션 계산
+            let arrowAngle = (3 * Math.PI / 2 - normalizedRotation) % (2 * Math.PI);
+            if (arrowAngle < 0) arrowAngle += 2 * Math.PI;
+            const selectedIndex = Math.floor(arrowAngle / arcSize) % items.length;
             
             const moneyValue = moneyInput.value.replace(/,/g, ''); // 콤마 제거
             
