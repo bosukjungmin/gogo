@@ -38,13 +38,14 @@
         }
 
         .input-section {
-            margin-bottom: 30px;
+            margin-bottom: 20px;
         }
 
         .input-group {
             display: flex;
             gap: 10px;
             margin-bottom: 10px;
+            align-items: center;
         }
 
         input {
@@ -59,6 +60,61 @@
         input:focus {
             outline: none;
             border-color: #667eea;
+        }
+
+        .delete-btn {
+            width: 40px;
+            height: 40px;
+            background-color: #ff4757;
+            color: white;
+            border: none;
+            border-radius: 8px;
+            font-size: 20px;
+            cursor: pointer;
+            transition: background-color 0.3s, transform 0.2s;
+            flex-shrink: 0;
+        }
+
+        .delete-btn:hover {
+            background-color: #ff3838;
+            transform: scale(1.05);
+        }
+
+        .delete-btn:active {
+            transform: scale(0.95);
+        }
+
+        .controls {
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+            margin-bottom: 30px;
+        }
+
+        .add-btn {
+            padding: 10px 20px;
+            font-size: 16px;
+            font-weight: bold;
+            color: white;
+            background-color: #4ECDC4;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: background-color 0.3s, transform 0.2s;
+        }
+
+        .add-btn:hover {
+            background-color: #45B7D1;
+            transform: translateY(-2px);
+        }
+
+        .add-btn:active {
+            transform: translateY(0);
+        }
+
+        .add-btn:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
         }
 
         .roulette-container {
@@ -149,6 +205,12 @@
                 padding: 12px 40px;
                 font-size: 18px;
             }
+
+            .delete-btn {
+                width: 35px;
+                height: 35px;
+                font-size: 18px;
+            }
         }
     </style>
 </head>
@@ -156,22 +218,12 @@
     <div class="container">
         <h1>오늘 뭐?</h1>
         
-        <div class="input-section">
-            <div class="input-group">
-                <input type="text" id="input1" placeholder="항목 1" maxlength="20">
-            </div>
-            <div class="input-group">
-                <input type="text" id="input2" placeholder="항목 2" maxlength="20">
-            </div>
-            <div class="input-group">
-                <input type="text" id="input3" placeholder="항목 3" maxlength="20">
-            </div>
-            <div class="input-group">
-                <input type="text" id="input4" placeholder="항목 4" maxlength="20">
-            </div>
-            <div class="input-group">
-                <input type="text" id="input5" placeholder="항목 5" maxlength="20">
-            </div>
+        <div class="input-section" id="inputSection">
+            <!-- 입력 필드들이 동적으로 추가됩니다 -->
+        </div>
+
+        <div class="controls">
+            <button class="add-btn" id="addBtn">+ 항목 추가</button>
         </div>
 
         <div class="roulette-container">
@@ -189,6 +241,8 @@
         const ctx = canvas.getContext('2d');
         const spinBtn = document.getElementById('spinBtn');
         const resultDiv = document.getElementById('result');
+        const inputSection = document.getElementById('inputSection');
+        const addBtn = document.getElementById('addBtn');
         
         // 캔버스 크기 설정
         const size = 400;
@@ -201,25 +255,84 @@
         let items = [];
         let rotation = 0;
         let isSpinning = false;
+        let inputCount = 0;
+        const MIN_INPUTS = 2;
+        const MAX_INPUTS = 20;
 
         // 색상 팔레트
-        const colors = ['#FF6B6B', '#4ECDC4', '#45B7D1', '#FFA07A', '#98D8C8'];
+        const colors = ['#FF6B6B', '#4ECDC4', '#45B7D1', '#FFA07A', '#98D8C8', 
+                        '#F7B731', '#5F27CD', '#00D2D3', '#FF9FF3', '#54A0FF',
+                        '#48DBFB', '#1DD1A1', '#EE5A6F', '#C44569', '#F8B500'];
 
-        // 입력 필드 이벤트 리스너
-        const inputs = [
-            document.getElementById('input1'),
-            document.getElementById('input2'),
-            document.getElementById('input3'),
-            document.getElementById('input4'),
-            document.getElementById('input5')
-        ];
+        // 초기 5개 입력칸 생성
+        function initialize() {
+            for (let i = 0; i < 5; i++) {
+                addInputField();
+            }
+            updateAddButtonState();
+        }
 
-        inputs.forEach(input => {
+        function addInputField() {
+            if (inputCount >= MAX_INPUTS) return;
+
+            inputCount++;
+            const inputGroup = document.createElement('div');
+            inputGroup.className = 'input-group';
+            inputGroup.dataset.id = inputCount;
+
+            const input = document.createElement('input');
+            input.type = 'text';
+            input.placeholder = `항목 ${inputCount}`;
+            input.maxLength = 20;
             input.addEventListener('input', updateItems);
-        });
+
+            const deleteBtn = document.createElement('button');
+            deleteBtn.className = 'delete-btn';
+            deleteBtn.innerHTML = '×';
+            deleteBtn.addEventListener('click', () => removeInputField(inputGroup));
+
+            inputGroup.appendChild(input);
+            inputGroup.appendChild(deleteBtn);
+            inputSection.appendChild(inputGroup);
+
+            updateAddButtonState();
+            updateDeleteButtonsState();
+        }
+
+        function removeInputField(inputGroup) {
+            const totalInputs = inputSection.querySelectorAll('.input-group').length;
+            if (totalInputs <= MIN_INPUTS) return;
+
+            inputGroup.remove();
+            inputCount--;
+            updateItems();
+            updateAddButtonState();
+            updateDeleteButtonsState();
+        }
+
+        function updateAddButtonState() {
+            const totalInputs = inputSection.querySelectorAll('.input-group').length;
+            addBtn.disabled = totalInputs >= MAX_INPUTS;
+        }
+
+        function updateDeleteButtonsState() {
+            const totalInputs = inputSection.querySelectorAll('.input-group').length;
+            const deleteButtons = inputSection.querySelectorAll('.delete-btn');
+            
+            deleteButtons.forEach(btn => {
+                if (totalInputs <= MIN_INPUTS) {
+                    btn.style.opacity = '0.3';
+                    btn.style.cursor = 'not-allowed';
+                } else {
+                    btn.style.opacity = '1';
+                    btn.style.cursor = 'pointer';
+                }
+            });
+        }
 
         function updateItems() {
-            items = inputs
+            const inputs = inputSection.querySelectorAll('input');
+            items = Array.from(inputs)
                 .map(input => input.value.trim())
                 .filter(value => value !== '');
             
@@ -342,9 +455,12 @@
             resultDiv.textContent = `🎉 ${items[selectedIndex]} 🎉`;
         }
 
+        // 이벤트 리스너
+        addBtn.addEventListener('click', addInputField);
         spinBtn.addEventListener('click', spinRoulette);
 
-        // 초기 그리기
+        // 초기화
+        initialize();
         drawRoulette();
     </script>
 </body>
