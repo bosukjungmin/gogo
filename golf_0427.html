@@ -1,0 +1,389 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>골프 라운드(0427-로제비앙CC) 공지</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Noto+Serif+KR:wght@400;600;700&family=Noto+Sans+KR:wght@300;400;500;700&display=swap');
+
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    font-family: 'Noto Sans KR', sans-serif;
+    background: #0f1c0f;
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 24px;
+  }
+
+  .card {
+    background: #f8f5ee;
+    max-width: 520px;
+    width: 100%;
+    border-radius: 4px;
+    overflow: hidden;
+    box-shadow: 0 20px 60px rgba(0,0,0,0.5);
+    animation: rise 0.7s ease both;
+  }
+
+  @keyframes rise {
+    from { opacity: 0; transform: translateY(24px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+
+  /* ── Header ── */
+  .header {
+    background: #1a3a1a;
+    padding: 32px 32px 24px;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .header::before {
+    content: '';
+    position: absolute;
+    top: -40px; right: -40px;
+    width: 160px; height: 160px;
+    border-radius: 50%;
+    background: rgba(255,255,255,0.04);
+  }
+
+  .header::after {
+    content: '';
+    position: absolute;
+    bottom: -20px; left: 60px;
+    width: 100px; height: 100px;
+    border-radius: 50%;
+    background: rgba(255,255,255,0.03);
+  }
+
+  .label {
+    font-size: 10px;
+    letter-spacing: 3px;
+    color: #7faa7f;
+    text-transform: uppercase;
+    margin-bottom: 8px;
+  }
+
+  .course-name {
+    font-family: 'Noto Serif KR', serif;
+    font-size: 26px;
+    font-weight: 700;
+    color: #f0ece0;
+    line-height: 1.2;
+    margin-bottom: 4px;
+  }
+
+  .date-line {
+    color: #a8c8a8;
+    font-size: 13px;
+    font-weight: 300;
+  }
+
+  /* ── Body ── */
+  .body {
+    padding: 28px 32px;
+  }
+
+  /* Groups */
+  .section-title {
+    font-size: 10px;
+    letter-spacing: 2.5px;
+    color: #7a8a6a;
+    text-transform: uppercase;
+    margin-bottom: 12px;
+    padding-bottom: 6px;
+    border-bottom: 1px solid #ddd8cc;
+  }
+
+  .group-row {
+    display: flex;
+    align-items: flex-start;
+    gap: 14px;
+    margin-bottom: 16px;
+  }
+
+  .tee-badge {
+    background: #1a3a1a;
+    color: #a8c8a8;
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 1px;
+    padding: 4px 10px;
+    border-radius: 2px;
+    white-space: nowrap;
+    margin-top: 2px;
+    flex-shrink: 0;
+  }
+
+  .group-info {
+    flex: 1;
+  }
+
+  .tee-time {
+    font-size: 16px;
+    font-weight: 700;
+    color: #1a3a1a;
+    margin-bottom: 3px;
+  }
+
+  .tee-time span {
+    font-size: 11px;
+    font-weight: 400;
+    color: #888;
+    margin-left: 6px;
+  }
+
+  .players {
+    font-size: 13px;
+    color: #444;
+    font-weight: 400;
+    line-height: 1.6;
+  }
+
+  .players strong {
+    font-weight: 600;
+    color: #1a3a1a;
+  }
+
+  /* Divider */
+  .divider {
+    border: none;
+    border-top: 1px dashed #d8d3c8;
+    margin: 20px 0;
+  }
+
+  /* Car allocation */
+  .car-grid {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  .car-row {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    background: #fff;
+    border: 1px solid #e8e4da;
+    border-radius: 4px;
+    padding: 10px 14px;
+  }
+
+  .car-icon {
+    font-size: 20px;
+    flex-shrink: 0;
+  }
+
+  .car-label {
+    font-size: 11px;
+    color: #7a8a6a;
+    font-weight: 500;
+    min-width: 52px;
+    flex-shrink: 0;
+  }
+
+  .car-passengers {
+    font-size: 13px;
+    color: #222;
+    font-weight: 500;
+    flex: 1;
+  }
+
+  .car-tag {
+    font-size: 10px;
+    padding: 2px 8px;
+    border-radius: 20px;
+    font-weight: 500;
+    flex-shrink: 0;
+  }
+
+  .tag-smoke {
+    background: #fff0e0;
+    color: #c06020;
+    border: 1px solid #f0c080;
+  }
+
+  .tag-no-smoke {
+    background: #e8f4e8;
+    color: #2a6a2a;
+    border: 1px solid #a8d0a8;
+  }
+
+  .caddie-note {
+    font-size: 10px;
+    color: #999;
+    margin-top: 2px;
+  }
+
+  /* Lunch */
+  .lunch-box {
+    background: #fff;
+    border: 1px solid #e8e4da;
+    border-radius: 4px;
+    padding: 14px 16px;
+  }
+
+  .lunch-name {
+    font-size: 15px;
+    font-weight: 700;
+    color: #1a3a1a;
+    margin-bottom: 4px;
+  }
+
+  .lunch-addr {
+    font-size: 12px;
+    color: #666;
+    line-height: 1.6;
+    margin-bottom: 10px;
+  }
+
+  .map-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    background: #1a3a1a;
+    color: #a8c8a8;
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 0.5px;
+    padding: 7px 14px;
+    border-radius: 3px;
+    text-decoration: none;
+    transition: background 0.2s;
+  }
+
+  .map-btn:hover { background: #2a5a2a; }
+
+  .naver-btn {
+    background: #03c75a;
+    color: #fff;
+    margin-left: 6px;
+  }
+  .naver-btn:hover { background: #02a84a; }
+
+  /* Footer */
+  .footer {
+    background: #1a3a1a;
+    padding: 14px 32px;
+    text-align: center;
+  }
+
+  .footer p {
+    font-size: 11px;
+    color: #7faa7f;
+    letter-spacing: 1px;
+  }
+</style>
+</head>
+<body>
+
+<div class="card">
+
+  <!-- Header -->
+  <div class="header">
+    <div class="label">라운드 공지</div>
+    <div class="course-name">로제 비앙 CC</div>
+    <div class="date-line">2026년 4월 27일 (월) &nbsp;·&nbsp; 비앙 → 네오 코스</div>
+  </div>
+
+  <!-- Body -->
+  <div class="body">
+
+    <!-- 조 편성 -->
+    <div class="section-title">조 편성 &amp; 티업 시간</div>
+
+    <div class="group-row">
+      <div class="tee-badge">1조</div>
+      <div class="group-info">
+        <div class="tee-time">12:06 <span>티업</span></div>
+        <div class="players">
+          <strong>박민훈&nbsp; 이명기&nbsp; 정성용&nbsp; 진원석</strong>
+        </div>
+      </div>
+    </div>
+
+    <div class="group-row">
+      <div class="tee-badge">2조</div>
+      <div class="group-info">
+        <div class="tee-time">12:13 <span>티업</span></div>
+        <div class="players">
+          <strong>황현주&nbsp; 김달수&nbsp; 김선기&nbsp; 한종엽</strong>
+        </div>
+      </div>
+    </div>
+
+    <hr class="divider">
+
+    <!-- 차량 배정 -->
+    <div class="section-title">차량 배정</div>
+
+    <div class="car-grid">
+
+      <div class="car-row">
+        <div class="car-icon">🚗</div>
+        <div class="car-label">배차 1</div>
+        <div>
+          <div class="car-passengers">정성용 · 김선기 · 김달수</div>
+          <div class="caddie-note">※ 이명기 캐디백 배정</div>
+        </div>
+        <div class="car-tag tag-smoke">흡연</div>
+      </div>
+
+      <div class="car-row">
+        <div class="car-icon">🚗</div>
+        <div class="car-label">배차 2</div>
+        <div>
+          <div class="car-passengers">진원석 · 황현주</div>
+        </div>
+        <div class="car-tag tag-no-smoke">비흡연</div>
+      </div>
+
+      <div class="car-row">
+        <div class="car-icon">🚗</div>
+        <div class="car-label">배차 3</div>
+        <div>
+          <div class="car-passengers">한종엽 · 박민훈 · 이명기</div>
+        </div>
+        <div class="car-tag tag-no-smoke">비흡연</div>
+      </div>
+
+    </div>
+
+    <hr class="divider">
+
+    <!-- 점심 식사 -->
+    <div class="section-title">점심 식사</div>
+
+    <div class="lunch-box">
+      <div class="lunch-name">🍲 신가네 해장국</div>
+      <div class="lunch-addr">
+        경기 광주시 곤지암읍 경충대로 497-2<br>
+        <span style="color:#aaa;">(곤지암리 200-6)</span>
+      </div>
+      <a class="map-btn"
+         href="https://map.kakao.com/link/search/경기 광주시 곤지암읍 경충대로 497-2"
+         target="_blank">
+        🗺 카카오맵 길찾기
+      </a>
+      <a class="map-btn naver-btn"
+         href="https://map.naver.com/v5/search/경기 광주시 곤지암읍 경충대로 497-2"
+         target="_blank">
+        N 네이버맵 길찾기
+      </a>
+    </div>
+
+  </div>
+
+  <!-- Footer -->
+  <div class="footer">
+    <p>즐거운 라운드 되세요 ⛳</p>
+  </div>
+
+</div>
+
+</body>
+</html>
