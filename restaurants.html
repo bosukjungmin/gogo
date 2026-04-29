@@ -1,0 +1,598 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>클락·앙헬레스 단체 맛집 가이드 — 20곳</title>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+KR:wght@300;400;600;700&family=Noto+Sans+KR:wght@300;400;500;700&family=DM+Serif+Display:ital@0;1&family=Instrument+Serif:ital@0;1&display=swap" rel="stylesheet">
+<style>
+:root{
+  --gold:#C9A84C;
+  --gold-lt:#F0D98A;
+  --gold-dk:#7D6020;
+  --navy:#0B1F3A;
+  --navy-mid:#162E50;
+  --navy-lt:#1E3A5F;
+  --cream:#F7F3EB;
+  --cream-dk:#EDE7D8;
+  --text:#1A1208;
+  --text-mid:#4A3F2A;
+  --text-lt:#7A6E58;
+  --red:#C0392B;
+  --green:#1B5E20;
+  --blue:#0C3B6E;
+  --purple:#4A148C;
+  --teal:#004D40;
+  --bg:#F5F0E8;
+}
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+
+body{
+  font-family:'Noto Sans KR',sans-serif;
+  background:var(--bg);
+  color:var(--text);
+  min-height:100vh;
+}
+
+/* 헤로 배너 */
+.hero{
+  background:var(--navy);
+  padding:4rem 2rem 3rem;
+  text-align:center;
+  position:relative;
+  overflow:hidden;
+}
+.hero::before{
+  content:'';
+  position:absolute;inset:0;
+  background:
+    repeating-linear-gradient(45deg,transparent,transparent 40px,rgba(201,168,76,.04) 40px,rgba(201,168,76,.04) 41px),
+    repeating-linear-gradient(-45deg,transparent,transparent 40px,rgba(201,168,76,.04) 40px,rgba(201,168,76,.04) 41px);
+}
+.hero-eyebrow{
+  font-family:'DM Serif Display',serif;
+  font-style:italic;
+  color:var(--gold);
+  font-size:1rem;
+  letter-spacing:.15em;
+  margin-bottom:1rem;
+  position:relative;
+}
+.hero-title{
+  font-family:'Instrument Serif',serif;
+  color:#fff;
+  font-size:clamp(2rem,5vw,3.2rem);
+  line-height:1.15;
+  margin-bottom:.75rem;
+  position:relative;
+}
+.hero-title span{color:var(--gold)}
+.hero-sub{
+  color:rgba(255,255,255,.6);
+  font-size:.9rem;
+  font-weight:300;
+  letter-spacing:.05em;
+  position:relative;
+}
+.hero-line{
+  width:60px;height:2px;
+  background:linear-gradient(90deg,transparent,var(--gold),transparent);
+  margin:1.5rem auto;
+}
+.hero-stats{
+  display:flex;justify-content:center;gap:3rem;
+  position:relative;margin-top:2rem;
+  flex-wrap:wrap;
+}
+.hero-stat-item{text-align:center}
+.hero-stat-num{
+  font-family:'Instrument Serif',serif;
+  color:var(--gold);
+  font-size:2rem;
+  display:block;line-height:1;
+}
+.hero-stat-lbl{color:rgba(255,255,255,.5);font-size:.75rem;letter-spacing:.1em;margin-top:.25rem}
+
+/* 필터 바 */
+.filter-wrap{
+  position:sticky;top:0;z-index:100;
+  background:var(--navy);
+  border-bottom:1px solid rgba(201,168,76,.2);
+  padding:.75rem 2rem;
+}
+.filter-inner{
+  max-width:1200px;margin:0 auto;
+  display:flex;gap:.5rem;flex-wrap:wrap;align-items:center;
+}
+.filter-label{
+  color:rgba(255,255,255,.4);
+  font-size:.75rem;letter-spacing:.1em;
+  margin-right:.5rem;white-space:nowrap;
+}
+.filter-btn{
+  font-family:'Noto Sans KR',sans-serif;
+  font-size:.78rem;
+  padding:.35rem .9rem;
+  border-radius:20px;
+  border:1px solid rgba(201,168,76,.3);
+  background:transparent;
+  color:rgba(255,255,255,.6);
+  cursor:pointer;
+  transition:all .2s;
+  white-space:nowrap;
+}
+.filter-btn:hover{border-color:var(--gold);color:var(--gold)}
+.filter-btn.active{background:var(--gold);border-color:var(--gold);color:var(--navy);font-weight:500}
+
+/* 메인 컨테이너 */
+.container{max-width:1200px;margin:0 auto;padding:2.5rem 1.5rem}
+
+/* 카드 그리드 */
+.grid{
+  display:grid;
+  grid-template-columns:repeat(auto-fill,minmax(340px,1fr));
+  gap:1.25rem;
+}
+
+/* 식당 카드 */
+.card{
+  background:#fff;
+  border-radius:12px;
+  overflow:hidden;
+  border:1px solid rgba(0,0,0,.07);
+  display:flex;flex-direction:column;
+  transition:transform .25s,box-shadow .25s;
+  animation:fadeUp .5s ease both;
+}
+.card:hover{
+  transform:translateY(-4px);
+  box-shadow:0 16px 40px rgba(11,31,58,.12);
+}
+@keyframes fadeUp{
+  from{opacity:0;transform:translateY(16px)}
+  to{opacity:1;transform:translateY(0)}
+}
+
+/* 카드 헤더 줄무늬 */
+.card-stripe{
+  height:4px;
+}
+
+/* 카드 바디 */
+.card-body{padding:1.25rem 1.25rem .875rem}
+
+.card-row1{display:flex;align-items:flex-start;gap:.75rem;margin-bottom:.625rem}
+
+.rank-circle{
+  width:36px;height:36px;border-radius:50%;
+  display:flex;align-items:center;justify-content:center;
+  font-family:'Instrument Serif',serif;
+  font-size:.95rem;
+  flex-shrink:0;margin-top:2px;
+}
+
+.card-title-wrap{flex:1}
+.card-name{
+  font-family:'Noto Serif KR',serif;
+  font-size:1rem;font-weight:600;
+  line-height:1.3;margin-bottom:.2rem;
+  color:var(--text);
+}
+.card-sub{font-size:.78rem;color:var(--text-lt);font-weight:300}
+
+/* 별점 */
+.rating-row{display:flex;align-items:center;gap:.5rem;margin-bottom:.75rem}
+.stars{color:#E8A800;font-size:.85rem;letter-spacing:1px}
+.rating-num{font-size:.9rem;font-weight:700;color:var(--text)}
+.review-cnt{font-size:.75rem;color:var(--text-lt)}
+
+/* 태그 */
+.tag-row{display:flex;flex-wrap:wrap;gap:.35rem;margin-bottom:.875rem}
+.tag{
+  font-size:.72rem;padding:.25rem .6rem;
+  border-radius:4px;font-weight:500;line-height:1;
+}
+.t-kor{background:#EAF3DE;color:#1B5E20}
+.t-sea{background:#E3F2FD;color:#0D47A1}
+.t-jpn{background:#FFF8E1;color:#E65100}
+.t-ita{background:#FCE4D6;color:#B71C1C}
+.t-buf{background:#E8F5E9;color:#1B5E20}
+.t-phi{background:#F3E5F5;color:#4A148C}
+.t-stk{background:#FFEBEE;color:#C62828}
+.t-reserve-must{background:#FFEBEE;color:#C62828}
+.t-reserve-good{background:#FFF8E1;color:#E65100}
+.t-reserve-free{background:#E8F5E9;color:#1B5E20}
+
+/* 인포 테이블 */
+.info-table{
+  background:var(--cream);
+  border-radius:8px;
+  overflow:hidden;
+  font-size:.8rem;
+  margin-bottom:.875rem;
+}
+.info-row{
+  display:grid;grid-template-columns:90px 1fr;
+  border-bottom:1px solid rgba(0,0,0,.06);
+  align-items:start;
+}
+.info-row:last-child{border-bottom:none}
+.info-row.full{grid-template-columns:1fr}
+.info-key{
+  padding:.5rem .75rem;
+  color:var(--text-lt);
+  font-weight:500;font-size:.73rem;
+  background:rgba(0,0,0,.04);
+  align-self:stretch;
+  display:flex;align-items:center;
+}
+.info-val{
+  padding:.5rem .75rem;
+  color:var(--text-mid);
+  line-height:1.45;
+}
+.info-val.distance{font-weight:600;color:var(--navy)}
+.info-val.price{font-weight:600;color:var(--gold-dk)}
+.info-val.tel{color:var(--blue);font-weight:500}
+
+/* 리뷰 스니펫 */
+.review-snip{
+  padding:.75rem 1.25rem;
+  background:var(--cream-dk);
+  border-top:1px solid rgba(0,0,0,.05);
+  font-size:.78rem;
+  color:var(--text-mid);
+  line-height:1.6;
+  font-style:italic;
+  font-family:'Noto Serif KR',serif;
+  flex:1;
+  position:relative;
+}
+.review-snip::before{
+  content:'"';
+  font-size:3rem;
+  font-family:'Instrument Serif',serif;
+  color:var(--gold);
+  opacity:.35;
+  position:absolute;
+  top:-.5rem;left:.5rem;
+  line-height:1;
+}
+
+/* 카드 수 카운터 */
+.result-bar{
+  display:flex;align-items:center;justify-content:space-between;
+  margin-bottom:1.25rem;
+  flex-wrap:wrap;gap:.5rem;
+}
+.result-count{
+  font-size:.85rem;color:var(--text-lt);
+}
+.result-count strong{color:var(--text);font-weight:600}
+
+/* 푸터 */
+.footer{
+  background:var(--navy);
+  color:rgba(255,255,255,.45);
+  text-align:center;
+  padding:2rem;
+  font-size:.8rem;
+  margin-top:3rem;
+}
+.footer strong{color:var(--gold)}
+
+/* 숨김 */
+.hidden{display:none!important}
+
+/* 반응형 */
+@media(max-width:600px){
+  .grid{grid-template-columns:1fr}
+  .hero{padding:2.5rem 1rem 2rem}
+  .hero-stats{gap:1.5rem}
+  .filter-inner{padding:0}
+}
+</style>
+</head>
+<body>
+
+<!-- 헤로 -->
+<div class="hero">
+  <div class="hero-eyebrow">🇵🇭 Philippines · Clark &amp; Angeles City</div>
+  <h1 class="hero-title">단체 맛집 가이드 <span>20</span>선</h1>
+  <div class="hero-line"></div>
+  <p class="hero-sub">20명 이상 수용 · 리뷰 좋은 순 · 숙소 거리 · 금액 · 연락처 완전 수록</p>
+  <div class="hero-stats">
+    <div class="hero-stat-item">
+      <span class="hero-stat-num">20</span>
+      <div class="hero-stat-lbl">검증된 식당</div>
+    </div>
+    <div class="hero-stat-item">
+      <span class="hero-stat-num">4.4</span>
+      <div class="hero-stat-lbl">평균 평점</div>
+    </div>
+    <div class="hero-stat-item">
+      <span class="hero-stat-num">4.9</span>
+      <div class="hero-stat-lbl">최고 평점</div>
+    </div>
+    <div class="hero-stat-item">
+      <span class="hero-stat-num">2분</span>
+      <div class="hero-stat-lbl">숙소 최근거리</div>
+    </div>
+  </div>
+</div>
+
+<!-- 필터 -->
+<div class="filter-wrap">
+  <div class="filter-inner">
+    <span class="filter-label">카테고리</span>
+    <button class="filter-btn active" data-cat="all">전체 20곳</button>
+    <button class="filter-btn" data-cat="한식">한식</button>
+    <button class="filter-btn" data-cat="해산물">해산물</button>
+    <button class="filter-btn" data-cat="일식">일식</button>
+    <button class="filter-btn" data-cat="이탈리안">이탈리안</button>
+    <button class="filter-btn" data-cat="뷔페">뷔페</button>
+    <button class="filter-btn" data-cat="기타">기타</button>
+  </div>
+</div>
+
+<!-- 메인 -->
+<div class="container">
+  <div class="result-bar">
+    <p class="result-count" id="result-count"><strong>20곳</strong> 표시 중</p>
+  </div>
+  <div class="grid" id="grid"></div>
+</div>
+
+<div class="footer">
+  <strong>클락 골프 여행 2026</strong> · 풀빌라 기준 거리 · 환율 PHP 1 = ₩27.5 · 2025~2026년 현지 시세 기준<br>
+  예약 전 반드시 전화로 수용 인원 및 가격 재확인 권장
+</div>
+
+<script>
+const VILLA={lat:15.1816,lng:120.5277};
+
+function km(lat,lng){
+  const R=6371,dLat=(lat-VILLA.lat)*Math.PI/180,dLng=(lng-VILLA.lng)*Math.PI/180;
+  const a=Math.sin(dLat/2)**2+Math.cos(VILLA.lat*Math.PI/180)*Math.cos(lat*Math.PI/180)*Math.sin(dLng/2)**2;
+  const d=R*2*Math.atan2(Math.sqrt(a),Math.sqrt(1-a));
+  return d<1?(d*1000).toFixed(0)+'m':(d).toFixed(1)+'km';
+}
+function min(lat,lng){
+  const R=6371,dLat=(lat-VILLA.lat)*Math.PI/180,dLng=(lng-VILLA.lng)*Math.PI/180;
+  const a=Math.sin(dLat/2)**2+Math.cos(VILLA.lat*Math.PI/180)*Math.cos(lat*Math.PI/180)*Math.sin(dLng/2)**2;
+  return Math.max(2,Math.round(R*2*Math.atan2(Math.sqrt(a),Math.sqrt(1-a))/0.5));
+}
+function starStr(r){return '★'.repeat(Math.round(r))+'☆'.repeat(5-Math.round(r))}
+
+// 카테고리별 색상
+const CAT_STRIPE={
+  '한식':  '#2E7D32',
+  '해산물':'#1565C0',
+  '일식':  '#E65100',
+  '이탈리안':'#B71C1C',
+  '뷔페':  '#1B5E20',
+  '필리핀':'#4A148C',
+  '기타':  '#37474F',
+};
+const CAT_TAG={
+  '한식':'t-kor','해산물':'t-sea','일식':'t-jpn',
+  '이탈리안':'t-ita','뷔페':'t-buf','필리핀':'t-phi',
+};
+const RANK_COLORS=[
+  {bg:'#FFF8E1',c:'#7D5800'},// 1
+  {bg:'#ECEFF1',c:'#37474F'},// 2
+  {bg:'#FBE9E7',c:'#8D1A00'},// 3
+];
+function rankStyle(n){
+  if(n<=3) return RANK_COLORS[n-1];
+  if(n<=10) return {bg:'#E8F0FB',c:'#0C447C'};
+  return {bg:'#F5F5F5',c:'#757575'};
+}
+
+const RESTAURANTS=[
+  {rank:1,name:"HOLA PARADE",sub:"Clark Parade Grounds 3층 레스토랑",cat:"이탈리안",
+   rating:4.9,cnt:4384,lat:15.1815,lng:120.527,
+   size:"100명+",hours:"11:00 ~ 24:00",price:"PHP 800~2,500 / 인",
+   tel:"+63 915 286 7507",contact:"전화·페이스북 예약",reserve:"필수",
+   review:"Clark 퍼레이드 그라운드 뷰. 스테이크·피자·파스타. 3층 베란다에서 피나투보 산 뷰. 단체 VIP룸 완비. 금토 새벽 1시까지 영업.",
+  },
+  {rank:2,name:"Italianni's SM Clark",sub:"이탈리안 체인 · SM몰 내",cat:"이탈리안",
+   rating:4.9,cnt:1219,lat:15.1703,lng:120.5787,
+   size:"50명+",hours:"10:00 ~ 22:00",price:"PHP 500~1,200 / 인",
+   tel:"매장 직접 문의",contact:"매장 방문 or 전화",reserve:"권장",
+   review:"파스타·피자 전문 이탈리안 체인. SM클락몰 내 위치. 직원 매우 친절. 단체 행사 적합. 서비스 신속.",
+  },
+  {rank:3,name:"Chef Baboy Clark",sub:"무제한 프리미엄 한국 BBQ",cat:"한식",
+   rating:4.8,cnt:2154,lat:15.1825,lng:120.5273,
+   size:"150명+",hours:"10:00 ~ 22:00 (토일 ~23:00)",price:"PHP 499~699 / 인 (무제한)",
+   tel:"+63 960 810 4898",contact:"전화 예약",reserve:"필수",
+   review:"Clark 최대 규모 무제한 삼겹살. 반찬 매우 풍성. 직원 신속·친절. 단체 최강 추천. 풀빌라에서 차 2분.",
+  },
+  {rank:4,name:"Chef Samurai Sushi Clark",sub:"프리미엄 일식 · Clark Parade Grounds",cat:"일식",
+   rating:4.7,cnt:270,lat:15.1827,lng:120.5273,
+   size:"40명+",hours:"11:00~21:00 (금토 ~22:00)",price:"PHP 400~1,200 / 인",
+   tel:"카드·GCash 가능 / 매장 문의",contact:"예약 가능",reserve:"권장",
+   review:"연어 아부리·소고기 텟판야키 절품. 예약 가능. 시설 청결. 직원 친절·열정적. 풀빌라 차 2분.",
+  },
+  {rank:5,name:"Chiisai Izakaya",sub:"정통 이자카야 · Clark 북부",cat:"일식",
+   rating:4.7,cnt:52,lat:15.2011,lng:120.5416,
+   size:"30명+",hours:"11:00~21:00 (일요일 휴무)",price:"PHP 350~900 / 인",
+   tel:"+63 920 489 9288",contact:"전화 예약",reserve:"권장",
+   review:"이자카야 감성 최고. 라멘·교자·탄탄멘 모두 맛있음. 고수부지 옆 아늑한 위치. 일 정기 휴무 주의.",
+  },
+  {rank:6,name:"Crabs N Crack Timog",sub:"씨푸드 케이준 무제한 · 24시간",cat:"해산물",
+   rating:4.8,cnt:601,lat:15.1454,lng:120.5596,
+   size:"80명+",hours:"24시간",price:"PHP 350~800 / 인",
+   tel:"+63 917 185 1527",contact:"전화 예약",reserve:"권장",
+   review:"케이준 씨푸드 무제한. 24시간 영업. 단체 최대 규모. 게·새우·오징어 세트 푸짐. 가성비 최강.",
+  },
+  {rank:7,name:"Crabs N Crack Friendship",sub:"코리아타운 인근 씨푸드",cat:"해산물",
+   rating:4.6,cnt:405,lat:15.1602,lng:120.5565,
+   size:"60명+",hours:"09:00~22:30 (금토 ~23:30)",price:"PHP 350~800 / 인",
+   tel:"+63 917 146 2142",contact:"전화 예약",reserve:"권장",
+   review:"케이준·버터갈릭 소스 선택. 신선 씨푸드 푸짐한 양. 코리아타운 인근 접근성 우수.",
+  },
+  {rank:8,name:"Kim's Brothers 한국 BBQ",sub:"이베리코 숯불구이 전문 · 24시간",cat:"한식",
+   rating:4.6,cnt:103,lat:15.1618,lng:120.5551,
+   size:"30명+",hours:"24시간",price:"PHP 600~1,500 / 인",
+   tel:"+63 939 233 1020",contact:"전화 예약 · 24시간",reserve:"권장",
+   review:"이베리코 돼지 숯불구이 전문. 직원이 직접 구워줌. 무제한 반찬. 단체룸 무료. 24시간 영업.",
+  },
+  {rank:9,name:"Mitsuki (First Clark Hotel)",sub:"정통 일식 · 일본인 셰프",cat:"일식",
+   rating:4.6,cnt:92,lat:15.1817,lng:120.5765,
+   size:"40명+",hours:"11:00~22:30",price:"PHP 500~1,500 / 인",
+   tel:"호텔 문의 (First Clark Hotel)",contact:"호텔 레스토랑 예약",reserve:"필수",
+   review:"일본인 셰프. 스시·롤·야키토리 전품 신선. Clark 최신 일식 맛집. 시설 최신·깔끔.",
+  },
+  {rank:10,name:"Olive (힐튼 Clark 리조트)",sub:"호텔 레스토랑 뷔페·아라카르테",cat:"뷔페",
+   rating:4.5,cnt:120,lat:15.1786,lng:120.5085,
+   size:"100명+",hours:"06:00~22:00",price:"PHP 700~1,800 / 인",
+   tel:"+63 45 598 5400",contact:"전화·이메일 예약",reserve:"필수",
+   review:"뷔페+아라카르테 겸용. 조식 특히 호평. 오믈렛 스테이션. 직원 최고 친절. 힐튼 레벨 품질.",
+  },
+  {rank:11,name:"Amare by Chef Chris",sub:"로이스 호텔 내 파인다이닝",cat:"이탈리안",
+   rating:4.5,cnt:525,lat:15.1794,lng:120.5303,
+   size:"60명+",hours:"11:00~22:00",price:"PHP 600~2,000 / 인",
+   tel:"+63 956 641 6500",contact:"전화 예약 필수",reserve:"필수",
+   review:"Rolliza(베스트셀러)·앙거스 비프 절품. 토마토 소스 스파게티 인생 맛. 고급스러운 분위기.",
+  },
+  {rank:12,name:"Grill Seoul Korean BBQ",sub:"숙성 삼겹살 · Parade Grounds 인근",cat:"한식",
+   rating:4.5,cnt:1007,lat:15.1817,lng:120.5277,
+   size:"50명+",hours:"11:00~23:00",price:"PHP 500~1,200 / 인",
+   tel:"+63 906 317 1026",contact:"전화 예약",reserve:"필수",
+   review:"숙성 삼겹살·서울 갈비 일품. 퍼레이드 그라운드 뷰. 에어컨+야외 좌석 모두 가능. 풀빌라 차 2분.",
+  },
+  {rank:13,name:"Ikebukuro Japanese Resto Bar",sub:"스시 보트 · 스키야키",cat:"일식",
+   rating:4.3,cnt:141,lat:15.1775,lng:120.5287,
+   size:"40명+",hours:"10:00~22:00 (목 11:00~)",
+   price:"PHP 400~1,200 / 인",
+   tel:"+63 932 222 3804",contact:"전화 예약",reserve:"권장",
+   review:"스시 보트·스키야키·소바 모두 신선. 와규 스테이크도 있음. 단체 가능. 미소 수프 무료.",
+  },
+  {rank:14,name:"Manimogo Korean BBQ (미모사)",sub:"미모사 골프장 내 무제한 BBQ",cat:"한식",
+   rating:4.3,cnt:188,lat:15.1817,lng:120.5190,
+   size:"80명+",hours:"11:30~22:00",price:"PHP 599 / 인 (무제한)",
+   tel:"+63 928 694 2222",contact:"전화 예약",reserve:"권장",
+   review:"반찬 뷔페 셀프서비스. 미모사 자연 뷰. 골프 라운딩 후 바로 방문 가능. 글래스 월 인테리어.",
+  },
+  {rank:15,name:"Markt (스위소텔 Clark)",sub:"호텔 뷔페 · 랍스터 뷔페 이벤트",cat:"뷔페",
+   rating:4.3,cnt:133,lat:15.1917,lng:120.5248,
+   size:"100명+",hours:"06:00~22:00",price:"PHP 800~2,500 / 인",
+   tel:"+63 45 306 2000",contact:"전화·이메일 예약",reserve:"필수",
+   review:"뷔페+아라카르테. 랍스터 뷔페 이벤트. 카지노 라운지 겸. 단체 VIP 행사 가능.",
+  },
+  {rank:16,name:"Fortune 홍콩 씨푸드",sub:"홍콩식 딤섬·라이브 씨푸드",cat:"해산물",
+   rating:4.2,cnt:677,lat:15.1658,lng:120.5899,
+   size:"60명+",hours:"10:00~22:00",price:"PHP 600~2,000 / 인",
+   tel:"+63 917 705 6984",contact:"전화 예약",reserve:"필수",
+   review:"홍콩식 딤섬·씨푸드. 새우 단연 최고. 단체 룸 완비. 비즈니스 연회·단체 행사 적합.",
+  },
+  {rank:17,name:"Angry Crab",sub:"칠리크랩 명물 · 단체룸 보유",cat:"해산물",
+   rating:4.2,cnt:754,lat:15.1594,lng:120.5557,
+   size:"40명+",hours:"11:00~24:00",price:"PHP 800~1,800 / 인",
+   tel:"+63 998 996 4331",contact:"전화 예약",reserve:"권장",
+   review:"칠리크랩 명물. 단체룸 완비. US 신용카드 가능. 신선 게 수조. 화장실 청결.",
+  },
+  {rank:18,name:"Café Mequeni (Quest Hotel)",sub:"뷔페 · 컨퍼런스 호텔 레스토랑",cat:"뷔페",
+   rating:4.2,cnt:120,lat:15.1831,lng:120.5241,
+   size:"80명+",hours:"06:00~22:00",price:"PHP 500~1,200 / 인",
+   tel:"+63 2 8845 1888",contact:"전화·이메일 예약",reserve:"필수",
+   review:"조식 뷔페 최고 호평. 필리핀·국제식 혼합. 컨퍼런스 단체 최적. Quest Hotel 1층.",
+  },
+  {rank:19,name:"Wooden Table Lutong Bahay",sub:"필리핀 가정식 · 카부들 트레이",cat:"필리핀",
+   rating:4.0,cnt:466,lat:15.1828,lng:120.5276,
+   size:"50명+",hours:"11:00~21:00 (토 ~22:00)",price:"PHP 300~700 / 인",
+   tel:"+63 962 943 7396",contact:"전화 예약",reserve:"권장",
+   review:"카부들 트레이 (12~15인 공유 대형 쟁반). 불랑랑·시니강·아도보 최고. 단체 경험 독특.",
+  },
+  {rank:20,name:"Bariotico EAYC 뷔페",sub:"무제한 카팜팡간 뷔페 · 가성비 최강",cat:"뷔페",
+   rating:3.8,cnt:528,lat:15.1682,lng:120.5973,
+   size:"100명+",hours:"10:00~22:00",price:"PHP 299 / 인 (무제한)",
+   tel:"+63 969 363 5564",contact:"전화 문의",reserve:"없어도 됨",
+   review:"PHP299 무제한. 카팜팡간 전통 음식 20가지+. 레촌·시식·상하이 전부 맛있음. 대규모 단체 최저가.",
+  },
+];
+
+let curCat='all';
+
+function renderCards(){
+  const grid=document.getElementById('grid');
+  const filtered=curCat==='all'?RESTAURANTS:RESTAURANTS.filter(r=>{
+    if(curCat==='기타') return !['한식','해산물','일식','이탈리안','뷔페'].includes(r.cat);
+    return r.cat===curCat;
+  });
+
+  document.getElementById('result-count').innerHTML=
+    `<strong>${filtered.length}곳</strong> 표시 중`;
+
+  grid.innerHTML=filtered.map((r,i)=>{
+    const d=km(r.lat,r.lng);
+    const m=min(r.lat,r.lng);
+    const rs=rankStyle(r.rank);
+    const stripe=CAT_STRIPE[r.cat]||'#607D8B';
+    const tagCls=CAT_TAG[r.cat]||'t-stk';
+    const resColor=r.reserve==='필수'?'t-reserve-must':r.reserve==='없어도 됨'?'t-reserve-free':'t-reserve-good';
+    const resLabel=r.reserve==='필수'?'예약 필수':r.reserve==='없어도 됨'?'예약 불필요':'예약 권장';
+    const delay=(i%12)*0.04;
+    return `
+<div class="card" style="animation-delay:${delay}s">
+  <div class="card-stripe" style="background:${stripe}"></div>
+  <div class="card-body">
+    <div class="card-row1">
+      <div class="rank-circle" style="background:${rs.bg};color:${rs.c}">${r.rank}</div>
+      <div class="card-title-wrap">
+        <div class="card-name">${r.name}</div>
+        <div class="card-sub">${r.sub}</div>
+      </div>
+    </div>
+    <div class="rating-row">
+      <span class="stars">${starStr(r.rating)}</span>
+      <span class="rating-num">${r.rating}</span>
+      <span class="review-cnt">(${r.cnt.toLocaleString()}개 리뷰)</span>
+    </div>
+    <div class="tag-row">
+      <span class="tag ${tagCls}">${r.cat}</span>
+      <span class="tag" style="background:#EFF3F8;color:#2C4A6E">${r.size} 수용</span>
+      <span class="tag ${resColor}">${resLabel}</span>
+    </div>
+    <div class="info-table">
+      <div class="info-row">
+        <div class="info-key">숙소 거리</div>
+        <div class="info-val distance">${d} · 차 약 ${m}분</div>
+      </div>
+      <div class="info-row">
+        <div class="info-key">금액대</div>
+        <div class="info-val price">${r.price}</div>
+      </div>
+      <div class="info-row">
+        <div class="info-key">영업시간</div>
+        <div class="info-val">${r.hours}</div>
+      </div>
+      <div class="info-row">
+        <div class="info-key">전화·예약</div>
+        <div class="info-val tel">${r.tel}</div>
+      </div>
+      <div class="info-row full">
+        <div class="info-val" style="padding:.45rem .75rem;font-size:.73rem;color:#7A6E58">${r.contact}</div>
+      </div>
+    </div>
+  </div>
+  <div class="review-snip">${r.review}</div>
+</div>`;
+  }).join('');
+}
+
+document.querySelectorAll('.filter-btn').forEach(btn=>{
+  btn.addEventListener('click',()=>{
+    document.querySelectorAll('.filter-btn').forEach(b=>b.classList.remove('active'));
+    btn.classList.add('active');
+    curCat=btn.dataset.cat;
+    renderCards();
+  });
+});
+
+renderCards();
+</script>
+</body>
+</html>
